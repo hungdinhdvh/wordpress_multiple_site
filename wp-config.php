@@ -102,13 +102,22 @@ define( 'PATH_CURRENT_SITE', '/' );
 define( 'SITE_ID_CURRENT_SITE', 1 );
 define( 'BLOG_ID_CURRENT_SITE', 1 );
 
+define('FORCE_SSL_ADMIN', true);
+if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
+    $_SERVER['HTTPS'] = 'on';
+}
+
+@ini_set('upload_max_filesize', '64M');
+@ini_set('post_max_size', '64M');
+@ini_set('max_execution_time', '300');
+
+define('COOKIE_DOMAIN', $_SERVER['HTTP_HOST']);
+/* That's all, stop editing! Happy publishing. */
+
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
+    define( 'ABSPATH', __DIR__ . '/' );
 }
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
-
-// add
-define('UPLOADS', 'wp-content/uploads');
